@@ -3,6 +3,7 @@ package pl.gornik;
 import java.time.LocalDate;
 
 public class Staff {
+    private int id;
     private String first_name;
     private String last_name;
     private int age;
@@ -11,7 +12,8 @@ public class Staff {
     private String email;
     private LocalDate dateOfEmployment;
 
-    public Staff(String first_name, String last_name, int age, double salary, String speciality, String email, LocalDate dateOfEmployment) {
+    public Staff(int id, String first_name, String last_name, int age, double salary, String speciality, String email, LocalDate dateOfEmployment) {
+        this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.age = age;
@@ -21,17 +23,20 @@ public class Staff {
         this.dateOfEmployment = dateOfEmployment;
     }
 
-    @Override
-    public String toString() {
-        return "Staff{" +
-                "first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                ", speciality='" + speciality + '\'' +
-                ", email='" + email + '\'' +
-                ", dateOfEmployment=" + dateOfEmployment +
-                '}';
+
+    public String displayStaff() {
+        return  "id= " + id +
+                ", first_name= '" + first_name  +
+                ", last_name= '" + last_name  +
+                ", age= " + age +
+                ", salary= " + salary +
+                ", speciality= '" + speciality +
+                ", email= '" + email  +
+                ", dateOfEmployment=  " + dateOfEmployment;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getFirst_name() {
