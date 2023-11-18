@@ -13,9 +13,9 @@ public class Menu {
 
     public String displayMenu() {
         return "Menu{" +
-                "menuItem= '" + menuItem +
+                "menuItem= " + menuItem +
                 ", price= " + price +
-                ", type= '" + type;
+                ", type= " + type;
 
     }
 }

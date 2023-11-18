@@ -26,12 +26,12 @@ public class Staff {
 
     public String displayStaff() {
         return  "id= " + id +
-                ", first_name= '" + first_name  +
-                ", last_name= '" + last_name  +
+                ", first_name= " + first_name  +
+                ", last_name= " + last_name  +
                 ", age= " + age +
                 ", salary= " + salary +
-                ", speciality= '" + speciality +
-                ", email= '" + email  +
+                ", speciality= " + speciality +
+                ", email= " + email  +
                 ", dateOfEmployment=  " + dateOfEmployment;
     }
 
