@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static int nextEmployeeId = 7;
     public static void main(String[] args) {
         List<Staff> Workers = new ArrayList<>();
         List<Menu> MenuList = new ArrayList<>();
@@ -92,7 +91,7 @@ public class Main {
                 System.out.println("Invalid format for age. Age has to be on plus.");
                 System.out.println("Age: ");
             } else {
-                age = Integer.parseInt(String.valueOf(ageInput));
+                age = (int) ageInput;
             }
 
         }
@@ -107,7 +106,7 @@ public class Main {
                 System.out.println("Invalid format for salary. Salary has to be on plus.");
                 System.out.println("Salary: ");
             } else {
-                salary = Double.parseDouble(String.valueOf(salaryInput));
+                salary = salaryInput;
             }
 
         }
@@ -135,19 +134,20 @@ public class Main {
         System.out.println("1. Cook");
         System.out.println("2. Waiter");
         int choice = scanner.nextInt();
+        int id = generateUniqueID(Workers);
 
         switch (choice) {
             case 1:
                 System.out.println("Years of experience: ");
                 int yearsOfExperience = scanner.nextInt();
-                nextEmployeeId++;
-                Workers.add(new Kitchen(nextEmployeeId, first_name, last_name, age, salary, speciality, email, dateOfEmployment, yearsOfExperience));
+
+                Workers.add(new Kitchen(id, first_name, last_name, age, salary, speciality, email, dateOfEmployment, yearsOfExperience));
                 break;
             case 2:
                 System.out.println("Tips per day: ");
                 int tipsperday = scanner.nextInt();
-                nextEmployeeId++;
-                Workers.add(new Waiters(nextEmployeeId, first_name, last_name, age, salary, speciality, email, dateOfEmployment, tipsperday));
+
+                Workers.add(new Waiters(id, first_name, last_name, age, salary, speciality, email, dateOfEmployment, tipsperday));
                 break;
         }
     }
@@ -178,5 +178,26 @@ public class Main {
 
     public static void expensesManagement() {
 
+    }
+
+    private static int generateUniqueID(List<Staff> workers) {
+        int id = 0;
+        boolean idExists;
+
+        do {
+            idExists = false;
+            for (Staff worker : workers) {
+                if (worker.getId() == id) {
+                    idExists = true;
+                    break;
+                }
+            }
+
+            if (idExists) {
+                id++; // If ID exists, try the next one
+            }
+        } while (idExists);
+
+        return id;
     }
 }
