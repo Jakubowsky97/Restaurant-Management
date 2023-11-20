@@ -91,20 +91,6 @@ public class Main {
                         case 2 -> changeItem(MenuList);
                         case 3 -> removeItem(MenuList);
                     }
-                case 4:
-                    System.out.println("Are you sure you want to exit? (1. Yes / 2. No)");
-                    int exitChoice = scanner.nextInt();
-
-                    if (exitChoice == 1) {
-                        System.out.println("Exiting the program. Goodbye!");
-                        System.exit(0);
-                    } else if (exitChoice == 2) {
-                        continue;
-                    } else {
-                        System.out.println("Invalid choice. Please enter 1 or 2.");
-                    }
-                    break;
-
             }
         }
     }
