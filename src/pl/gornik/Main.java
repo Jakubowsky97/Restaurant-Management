@@ -112,24 +112,21 @@ public class Main {
 
     }
 
-    static int generateUniqueID(List<Staff> workers) {
-        int id = 0;
-        boolean idExists;
+    public static void changeItem(List<Menu> MenuList) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Select name of item.");
 
-        do {
-            idExists = false;
-            for (Staff worker : workers) {
-                if (worker.getId() == id) {
-                    idExists = true;
-                    break;
-                }
+        String nameOfChoice = scanner.next();
+
+        for (Menu menu : MenuList) {
+            if(menu.getMenuItem().equalsIgnoreCase(nameOfChoice)) {
+                System.out.println("What do you want to change?");
+                System.out.println("1. Name Of Product");
+                System.out.println("2. Price");
+                System.out.println("3. Type");
+                //if()
             }
 
-            if (idExists) {
-                id++;
-            }
-        } while (idExists);
-
-        return id;
+        }
     }
 }

@@ -1,11 +1,10 @@
 package pl.gornik;
 
+import pl.gornik.food.Drinks;
 import pl.gornik.food.meals;
 
 import java.util.List;
 import java.util.Scanner;
-
-import static pl.gornik.Main.generateUniqueID;
 
 public class Menu {
     public int id_food;
@@ -21,8 +20,7 @@ public class Menu {
     }
 
     public String displayMenu() {
-        return "Menu{" +
-                "id_food= " + id_food +
+        return "id_food= " + id_food +
                 ", menuItem= " + menuItem +
                 ", price= " + price +
                 ", type= " + type;
@@ -90,19 +88,28 @@ public class Menu {
         System.out.println("Type of food:");
         String type = scanner.next();
 
-        System.out.println("Meal or Drink.");
-        String choice = scanner.next();
+        boolean choice_isTrue = true;
+        while(choice_isTrue) {
+            System.out.println("Meal or Drink.");
+            String choice = scanner.next();
 
-        int id = generateUniqueID(MenuList);
+            int id = generateUniqueID(MenuList);
 
-        if(choice.equalsIgnoreCase("meal")) {
-            //MenuList.add(new meals())
+            if (choice.equalsIgnoreCase("meal")) {
+                System.out.println("How much calories: ");
+                int calories = scanner.nextInt();
+
+                MenuList.add(new meals(id, menuItem, price, type, calories));
+                choice_isTrue = false;
+            } else if (choice.equalsIgnoreCase("drinks")) {
+                System.out.println("Is hot?");
+                boolean isHot = scanner.nextBoolean();
+                choice_isTrue = false;
+                MenuList.add(new Drinks(id, menuItem, price, type, isHot));
+            } else {
+                choice_isTrue = true;
+            }
         }
-
-
-    }
-
-    public static void changeItem(List<Menu> MenuList) {
 
     }
 

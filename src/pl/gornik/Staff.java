@@ -9,8 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import static pl.gornik.Main.generateUniqueID;
-
 public class Staff {
     private int id;
     private String first_name;
@@ -99,6 +97,27 @@ public class Staff {
 
     public void setDateOfEmployment(LocalDate dateOfEmployment) {
         this.dateOfEmployment = dateOfEmployment;
+    }
+
+    static int generateUniqueID(List<Staff> workers) {
+        int id = 0;
+        boolean idExists;
+
+        do {
+            idExists = false;
+            for (Staff worker : workers) {
+                if (worker.getId() == id) {
+                    idExists = true;
+                    break;
+                }
+            }
+
+            if (idExists) {
+                id++;
+            }
+        } while (idExists);
+
+        return id;
     }
 
     public static void addStaff(List<Staff> Workers) {
