@@ -1,5 +1,7 @@
 package pl.gornik;
 
+import java.util.List;
+
 public class Menu {
     public int id_food;
     public String menuItem;
@@ -19,6 +21,18 @@ public class Menu {
                 ", menuItem= " + menuItem +
                 ", price= " + price +
                 ", type= " + type;
+
+    }
+
+    public static void addItem(List<Menu> MenuList) {
+
+    }
+
+    public static void changeItem(List<Menu> MenuList) {
+
+    }
+
+    public static void removeItem(List<Menu> MenuList) {
 
     }
 }

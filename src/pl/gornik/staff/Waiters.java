@@ -12,6 +12,11 @@ public class Waiters extends Staff {
         this.numberOfTipsPerDay = numberOfTipsPerDay;
     }
 
+    public Waiters(int id, String first_name, String last_name, int age, double salary, String speciality, LocalDate dateOfEmployment, int numberOfTipsPerDay) {
+        super(id, first_name, last_name, age, salary, speciality, dateOfEmployment);
+        this.numberOfTipsPerDay = numberOfTipsPerDay;
+    }
+
     @Override
     public String displayStaff() {
         return super.displayStaff() +

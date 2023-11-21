@@ -12,6 +12,11 @@ public class Kitchen extends Staff {
         this.yearsOfExperience = yearsOfExperience;
     }
 
+    public Kitchen(int id, String first_name, String last_name, int age, double salary, String speciality, LocalDate dateOfEmployment, int yearsOfExperience) {
+        super(id, first_name, last_name, age, salary, speciality, dateOfEmployment);
+        this.yearsOfExperience = yearsOfExperience;
+    }
+
     @Override
     public String displayStaff() {
         return super.displayStaff() +
