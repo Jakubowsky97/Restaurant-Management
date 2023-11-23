@@ -20,8 +20,7 @@ public class Waiters extends Staff {
     @Override
     public String displayStaff() {
         return super.displayStaff() +
-                ", number of tips per day= " + numberOfTipsPerDay
-                + "}";
+                ", number of tips per day= " + numberOfTipsPerDay;
     }
 
     public int getNumberOfTipsPerDay() {

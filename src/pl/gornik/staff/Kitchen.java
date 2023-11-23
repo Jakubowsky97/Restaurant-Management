@@ -20,8 +20,7 @@ public class Kitchen extends Staff {
     @Override
     public String displayStaff() {
         return super.displayStaff() +
-                ", years of experience= " + yearsOfExperience
-                + "}";
+                ", years of experience= " + yearsOfExperience;
     }
 
     public int getYearsOfExperience() {
