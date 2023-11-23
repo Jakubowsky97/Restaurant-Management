@@ -5,8 +5,6 @@ import pl.gornik.food.meals;
 import java.util.List;
 import java.util.Scanner;
 
-import static pl.gornik.Main.generateUniqueID;
-
 public class Menu {
     public int id_food;
     public String menuItem;

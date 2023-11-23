@@ -14,6 +14,8 @@ public class Main {
     public static void main(String[] args) {
         List<Staff> Workers = new ArrayList<>();
         List<Menu> MenuList = new ArrayList<>();
+        List<Income> Income = new ArrayList<>();
+        List<Expenses> Expense = new ArrayList<>();
 
         //dodawanie 8 pracowników do listy Workers.
         Workers.add(new Kitchen(0, "Adrianna", "Nowak", 31, 3182.00, "Cook", "NowakAdrianna@gmail.com", LocalDate.of(2017, 2, 20), 8));
@@ -36,6 +38,8 @@ public class Main {
         MenuList.add(new meals(7, "Pizza with salami", 10.89, "Pizza", 2505));
         MenuList.add(new meals(8, "Tiramisu", 8.49, "Dessert", 616));
         MenuList.add(new meals(9, "Ice Cream", 1.49, "Dessert", 252));
+
+        //Dodawanie Income
 
         Scanner scanner = new Scanner(System.in);
 
@@ -110,26 +114,5 @@ public class Main {
 
     public static void expensesManagement() {
 
-    }
-
-    static int generateUniqueID(List<Staff> workers) {
-        int id = 0;
-        boolean idExists;
-
-        do {
-            idExists = false;
-            for (Staff worker : workers) {
-                if (worker.getId() == id) {
-                    idExists = true;
-                    break;
-                }
-            }
-
-            if (idExists) {
-                id++;
-            }
-        } while (idExists);
-
-        return id;
     }
 }
