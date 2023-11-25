@@ -90,7 +90,7 @@ public class Main {
                     int choice_menuList = scanner.nextInt();
                     switch (choice_menuList) {
                         case 1 -> Menu.addItem(MenuList);
-                        //case 2 -> Menu.changeItem(MenuList);
+                        case 2 -> changeItem(MenuList);
                         case 3 -> Menu.removeItem(MenuList);
                     }
             }
@@ -115,25 +115,49 @@ public class Main {
     public static void expensesManagement() {
 
     }
-<<<<<<< HEAD
-=======
 
     public static void changeItem(List<Menu> MenuList) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Select name of item.");
 
-        String nameOfChoice = scanner.next();
+        boolean isChanged = false;
 
-        for (Menu menu : MenuList) {
-            if(menu.getMenuItem().equalsIgnoreCase(nameOfChoice)) {
-                System.out.println("What do you want to change?");
-                System.out.println("1. Name Of Product");
-                System.out.println("2. Price");
-                System.out.println("3. Type");
-                //if()
+        do {
+            System.out.println("Select name of item.");
+
+            String nameOfChoice = scanner.next();
+
+            for (Menu menu : MenuList) {
+                if (menu.getMenuItem().equalsIgnoreCase(nameOfChoice)) {
+                    System.out.println("What do you want to change?");
+                    System.out.println("1. Name Of Product");
+                    System.out.println("2. Price");
+                    System.out.println("3. Type");
+
+                    int choice = scanner.nextInt();
+                    switch (choice) {
+                        case 1:
+                            System.out.println("Type in new name of product: ");
+                            String newName = scanner.next();// Podczas wpisywania 2 czesciowej nazwy zmienia tylko pierwsza czesc.
+                            menu.setMenuItem(newName.trim());
+                            isChanged = true;
+                            break;
+                        case 2:
+                            System.out.println("Type in new price: ");
+                            double newPrice = scanner.nextDouble();
+                            menu.setPrice(newPrice);
+                            isChanged = true;
+                            break;
+                        case 3:
+                            System.out.println("Type in new type of product: ");
+                            String newType = scanner.nextLine();
+                            menu.setType(newType);
+                            isChanged = true;
+                            break;
+                    }
+                }
+
             }
-
         }
+        while(isChanged != true);
     }
->>>>>>> 347f7dfcd9210855cbc6bcbd871b8a0c0cf3f970
 }

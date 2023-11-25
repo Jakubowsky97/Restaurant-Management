@@ -9,11 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-<<<<<<< HEAD
-import static pl.gornik.Menu.generateUniqueID;
-
-=======
->>>>>>> 347f7dfcd9210855cbc6bcbd871b8a0c0cf3f970
 public class Staff {
     private int id;
     private String first_name;
