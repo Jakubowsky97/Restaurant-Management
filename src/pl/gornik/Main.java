@@ -40,10 +40,10 @@ public class Main {
         MenuList.add(new meals(9, "Ice Cream", 1.49, "Dessert", 252));
 
         //Dodawanie Income
-        //IncomeList.add(new Income(12000, 387, LocalDate.of()));
+        IncomeList.add(new Income(12000, 387, LocalDate.of(2023, 11, 15)));
 
         //Dodawanie Expenses
-        //ExpenseList.add(new Expenses(4000, 1200, 500));
+        ExpenseList.add(new Expenses(4000, 1200, 500, LocalDate.of(2023, 11, 30)));
 
         Scanner scanner = new Scanner(System.in);
 
