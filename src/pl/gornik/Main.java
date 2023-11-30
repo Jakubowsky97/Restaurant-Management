@@ -14,8 +14,8 @@ public class Main {
     public static void main(String[] args) {
         List<Staff> Workers = new ArrayList<>();
         List<Menu> MenuList = new ArrayList<>();
-        List<Income> Income = new ArrayList<>();
-        List<Expenses> Expense = new ArrayList<>();
+        List<Income> IncomeList = new ArrayList<>();
+        List<Expenses> ExpenseList = new ArrayList<>();
 
         //dodawanie 8 pracowników do listy Workers.
         Workers.add(new Kitchen(0, "Adrianna", "Nowak", 31, 3182.00, "Cook", "NowakAdrianna@gmail.com", LocalDate.of(2017, 2, 20), 8));
@@ -40,6 +40,10 @@ public class Main {
         MenuList.add(new meals(9, "Ice Cream", 1.49, "Dessert", 252));
 
         //Dodawanie Income
+        //IncomeList.add(new Income(12000, 387, LocalDate.of()));
+
+        //Dodawanie Expenses
+        //ExpenseList.add(new Expenses(4000, 1200, 500));
 
         Scanner scanner = new Scanner(System.in);
 
@@ -67,15 +71,7 @@ public class Main {
                     }
                     break;
                 case 2:
-                    System.out.println("-------------------------------------");
-                    System.out.println("1. Income Management");
-                    System.out.println("2. Expenses Management");
-                    System.out.println("-------------------------------------");
-                    int choice_income = scanner.nextInt();
-                    switch (choice_income) {
-                        case 1 -> incomeManagement();
-                        case 2 -> expensesManagement();
-                    }
+                    income_expensesManagement(IncomeList, ExpenseList);
                     break;
                 case 3:
                     System.out.println("Menu: ");
@@ -108,12 +104,36 @@ public class Main {
         System.out.println("-------------------------------------");
     }
 
-    public static void incomeManagement() {
+    public static void income_expensesManagement(List<Income> incomeList, List<Expenses> expensesList) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Income/Expenses Management");
+        System.out.println("-------------------------------------");
+        System.out.println("1. Show income");
+        System.out.println("2. Show expenses");
+        System.out.println("-------------------------------------");
 
+        int choice = scanner.nextInt();
+
+        switch (choice) {
+            case 1:
+                incomeManagement(incomeList);
+            case 2:
+                expensesManagement(expensesList);
+        }
     }
 
-    public static void expensesManagement() {
+    public static void incomeManagement(List<Income> incomeList) {
+        for (Income income : incomeList) {
+            System.out.println(income.toString());
+        }
 
+        System.out.println("1. ");
+    }
+
+    public static void expensesManagement(List<Expenses> expensesList) {
+        for (Expenses expenses : expensesList) {
+            System.out.println(expenses.toString());
+        }
     }
 
     public static void changeItem(List<Menu> MenuList) {
