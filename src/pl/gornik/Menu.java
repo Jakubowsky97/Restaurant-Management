@@ -3,6 +3,7 @@ package pl.gornik;
 import pl.gornik.food.Drinks;
 import pl.gornik.food.meals;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -114,6 +115,47 @@ public class Menu {
     }
 
     public static void removeItem(List<Menu> MenuList) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Which item from menu do you want to remove?");
+        System.out.println("Please enter the ID of the item:");
 
+        int choice = scanner.nextInt();
+        Iterator<Menu> iterator = MenuList.iterator();
+        while (iterator.hasNext()) {
+            Menu menu = iterator.next();
+            int id_item = menu.id_food;
+
+            if(id_item == choice) {
+                iterator.remove();
+                System.out.println("Item with ID " + choice + " has been removed.");
+                System.out.println();
+                System.out.println("Write anything to go back.");
+                scanner.nextLine();
+                break;
+            }
+
+        }
+    }
+
+    public static void setDiscountedPrice(List<Menu> MenuList) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Select item from menu, you want to discount.");
+        String choice = scanner.next();
+        System.out.println("How much percentage you want discount?");
+        int percentage = scanner.nextInt();
+        for (Menu menu : MenuList) {
+            if(choice.equalsIgnoreCase(menu.getMenuItem())) {
+                double price = menu.getPrice();
+                if (percentage >= 0 && percentage <= 100) {
+                    double discount = price * ((double) percentage / 100);
+                    price = price - discount;
+                    menu.setPrice(price);
+                } else {
+                    System.out.println("Invalid discount percentage. Please enter a value between 0 and 100.");
+                }
+                System.out.println("Write anything to go back.");
+                scanner.nextLine();
+            }
+        }
     }
 }
