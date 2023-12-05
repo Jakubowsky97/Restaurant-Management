@@ -17,6 +17,8 @@ public class Main {
         List<Menu> MenuList = new ArrayList<>();
         List<Income> IncomeList = new ArrayList<>();
         List<Expenses> ExpenseList = new ArrayList<>();
+        List<Menu> cart = new ArrayList<>();
+        List<Double> cart_sum = new ArrayList<>();
 
         //Dodawanie 10-ciu opcji w menu.
         MenuList.add(new Drinks(0, "Caffe Latte", 6.65, "Coffee", true));
@@ -160,7 +162,7 @@ public class Main {
                     int choice = scanner.nextInt();
                     switch (choice) {
                         case 1:
-
+                            cart(MenuList, cart, cart_sum);
                             break;
                         case 2:
 
@@ -259,5 +261,54 @@ public class Main {
 
     public static void upcomingSales() {
 
+    }
+
+    public static void cart(List<Menu> MenuList, List<Menu> koszyk, List<Double> cart_sum) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome! Choose what you want to add to your cart.");
+        System.out.println();
+
+        boolean czyDalej = true;
+// FIXME: 05.12.2023 
+        while(czyDalej) {
+            System.out.println("Choose product.");
+            String wybor = scanner.next();
+            for (int i = 0; i < MenuList.size(); i++) {
+                if (wybor != MenuList.get(i).getMenuItem()) {
+                    i = MenuList.size() - 1;
+                    System.out.println("Nie posiadamy takiego produktu na stanie");
+                }
+            }
+
+
+            for (Menu menu : MenuList) {
+                if (wybor.equalsIgnoreCase(menu.getMenuItem())) {
+                    Menu prod = new Menu(menu);
+                        koszyk.add(prod);
+                        System.out.println(koszyk.get(0).displayMenu());
+                        break;
+
+                }
+            }
+            System.out.println("Czy chcesz dodać do koszyka coś jeszcze (wybierz 1) czy chcesz przejść do Koszyka (wybierz 2).");
+            int wybor_end = scanner.nextInt();
+            if(wybor_end == 1) {
+                czyDalej = true;
+            } else if(wybor_end == 2) {
+                czyDalej = false;
+                break;
+            }
+        }
+
+        for(Menu menu : koszyk) {
+            System.out.println(menu.getMenuItem() + ", " + menu.getPrice() + " zł");
+
+            double suma = menu.getPrice();
+            cart_sum.add(suma);
+        }
+
+        for(int i = 0; i < cart_sum.size(); i++){
+            System.out.println(cart_sum.get(i));
+        }
     }
 }

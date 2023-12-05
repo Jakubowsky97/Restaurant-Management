@@ -20,6 +20,10 @@ public class Menu {
         this.type = type;
     }
 
+    public Menu(Menu menu) {
+        this(menu.id_food, menu.menuItem, menu.price, menu.type);
+    }
+
     public String displayMenu() {
         return "id_food= " + id_food +
                 ", menuItem= " + menuItem +
