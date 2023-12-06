@@ -5,11 +5,11 @@ import pl.gornik.food.meals;
 import pl.gornik.staff.Kitchen;
 import pl.gornik.staff.Waiters;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,7 +18,6 @@ public class Main {
         List<Income> IncomeList = new ArrayList<>();
         List<Expenses> ExpenseList = new ArrayList<>();
         List<Menu> cart = new ArrayList<>();
-        List<Double> cart_sum = new ArrayList<>();
 
         //Dodawanie 10-ciu opcji w menu.
         MenuList.add(new Drinks(0, "Caffe Latte", 6.65, "Coffee", true));
@@ -155,19 +154,20 @@ public class Main {
                     System.out.println("Choose what you want to do.");
                     System.out.println("-------------------------------------");
                     System.out.println("1. Buy food/drinks");
-                    System.out.println("2. Reserve table");
-                    System.out.println("3. Upcoming sales");
                     System.out.println("-------------------------------------");
 
                     int choice = scanner.nextInt();
                     switch (choice) {
                         case 1:
-                            cart(MenuList, cart, cart_sum);
+                            System.out.println("Menu: ");
+                            for (Menu menu : MenuList) {
+                                System.out.println(menu.displayMenu());
+                            }
+                            System.out.println();
+                            cart(MenuList, cart);
+                            isChoosed = true;
                             break;
                         case 2:
-
-
-                        case 3:
 
 
                     }
@@ -222,7 +222,7 @@ public class Main {
         do {
             System.out.println("Select name of item.");
 
-            String nameOfChoice = scanner.next();
+            String nameOfChoice = scanner.nextLine();
 
             for (Menu menu : MenuList) {
                 if (menu.getMenuItem().equalsIgnoreCase(nameOfChoice)) {
@@ -232,16 +232,19 @@ public class Main {
                     System.out.println("3. Type");
 
                     int choice = scanner.nextInt();
+                    scanner.nextLine(); // Consume the newline character
+
                     switch (choice) {
                         case 1:
                             System.out.println("Type in new name of product: ");
-                            String newName = scanner.next();// Podczas wpisywania 2 czesciowej nazwy zmienia tylko pierwsza czesc.
+                            String newName = scanner.nextLine();
                             menu.setMenuItem(newName.trim());
                             isChanged = true;
                             break;
                         case 2:
                             System.out.println("Type in new price: ");
                             double newPrice = scanner.nextDouble();
+                            scanner.nextLine(); // Consume the newline character
                             menu.setPrice(newPrice);
                             isChanged = true;
                             break;
@@ -252,37 +255,43 @@ public class Main {
                             isChanged = true;
                             break;
                     }
+                    System.out.println("Write anything to go back.");
+                    scanner.nextLine();
                 }
-
             }
-        }
-        while(isChanged != true);
+        } while (!isChanged);
     }
 
     public static void upcomingSales() {
 
     }
 
-    public static void cart(List<Menu> MenuList, List<Menu> koszyk, List<Double> cart_sum) {
+    public static void cart(List<Menu> MenuList, List<Menu> koszyk) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome! Choose what you want to add to your cart.");
         System.out.println();
 
         boolean czyDalej = true;
-// FIXME: 05.12.2023 
-        while(czyDalej) {
+        do {
             System.out.println("Choose product.");
-            String wybor = scanner.next();
-            for (int i = 0; i < MenuList.size(); i++) {
-                if (wybor != MenuList.get(i).getMenuItem()) {
-                    i = MenuList.size() - 1;
-                    System.out.println("Nie posiadamy takiego produktu na stanie");
+            String wybor = scanner.nextLine().trim();
+            boolean found = false;
+
+            for (Menu value : MenuList) {
+                if (Objects.equals(wybor, value.getMenuItem())) {
+                    found = true;
+                    break;
                 }
+            }
+
+            if (!found) {
+                System.out.println("We don't have that item in the menu.");
+                continue;
             }
 
 
             for (Menu menu : MenuList) {
-                if (wybor.equalsIgnoreCase(menu.getMenuItem())) {
+                if (wybor.equals(menu.getMenuItem())) {
                     Menu prod = new Menu(menu);
                         koszyk.add(prod);
                         System.out.println(koszyk.get(0).displayMenu());
@@ -290,25 +299,33 @@ public class Main {
 
                 }
             }
-            System.out.println("Czy chcesz dodać do koszyka coś jeszcze (wybierz 1) czy chcesz przejść do Koszyka (wybierz 2).");
-            int wybor_end = scanner.nextInt();
-            if(wybor_end == 1) {
+            System.out.println("Do you want to continue shopping (choose 1) or you want to end (choose 2).");
+            int wybor_end;
+            try {
+                wybor_end = Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue; // Skip the rest of the loop and start again
+            }
+            if (wybor_end == 1) {
                 czyDalej = true;
-            } else if(wybor_end == 2) {
+            } else if (wybor_end == 2) {
                 czyDalej = false;
                 break;
             }
-        }
+        } while (czyDalej);
 
+        DecimalFormat df = new DecimalFormat("#.##", DecimalFormatSymbols.getInstance(Locale.US));
+
+        double sum = 0;
         for(Menu menu : koszyk) {
             System.out.println(menu.getMenuItem() + ", " + menu.getPrice() + " zł");
 
-            double suma = menu.getPrice();
-            cart_sum.add(suma);
+            double cena = menu.getPrice();
+            sum += cena; // Add the price to the total sum directly
         }
 
-        for(int i = 0; i < cart_sum.size(); i++){
-            System.out.println(cart_sum.get(i));
-        }
+        sum = Double.parseDouble(df.format(sum));
+        System.out.println("Your total amount is: " + sum + " zł");
     }
 }

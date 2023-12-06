@@ -91,12 +91,12 @@ public class Menu {
         Double price = scanner.nextDouble();
 
         System.out.println("Type of food:");
-        String type = scanner.next();
+        String type = scanner.nextLine();
 
         boolean choice_isTrue = true;
         while(choice_isTrue) {
             System.out.println("Meal or Drink.");
-            String choice = scanner.next();
+            String choice = scanner.nextLine();
 
             int id = generateUniqueID(MenuList);
 
@@ -106,7 +106,7 @@ public class Menu {
 
                 MenuList.add(new meals(id, menuItem, price, type, calories));
                 choice_isTrue = false;
-            } else if (choice.equalsIgnoreCase("drinks")) {
+            } else if (choice.equalsIgnoreCase("drink")) {
                 System.out.println("Is hot?");
                 boolean isHot = scanner.nextBoolean();
                 choice_isTrue = false;
@@ -144,7 +144,7 @@ public class Menu {
     public static void setDiscountedPrice(List<Menu> MenuList) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Select item from menu, you want to discount.");
-        String choice = scanner.next();
+        String choice = scanner.nextLine();
         System.out.println("How much percentage you want discount?");
         int percentage = scanner.nextInt();
         for (Menu menu : MenuList) {
